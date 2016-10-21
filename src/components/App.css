@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+h1 {
+  display: block;
+  margin: 0;
+  border-top: 1px solid #ddd;
+  background: #eee;
+  font-size: 12px;
+  padding: 3px;
+  font-weight: normal;
+}

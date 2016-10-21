@@ -1,0 +1,32 @@
+// GET /playlists
+// https://openwhyd.org/u/{:user_id}/playlists
+
+// GET /playlists/{:playlist_id}
+// https://openwhyd.org/u/{:user_id}/playlist/{:playlist_id}
+
+// POST
+// https://openwhyd.org/api/playlist
+/*
+action:create
+name:test
+*/
+
+// PUT
+// https://openwhyd.org/api/playlist
+/*
+action:rename
+name:test-edit
+id:27 // index in user profile?
+*/
+
+// DELETE
+// https://openwhyd.org/api/playlist
+/*
+action:delete
+id:27
+*/
+
+// Image upload
+
+// POST
+// https://openwhyd.org/upload
