@@ -6,6 +6,18 @@ import UserPassForm from '../components/UserPassForm.js';
 
 import login, { facebook_login } from '../actions/api/login.js';
 
+// DEBUG
+import md5 from 'md5';
+function toForm(json) {
+  var form_data = new FormData();
+
+  for ( var key in json ) {
+    form_data.append(key, json[key]);
+  }
+  return form_data;
+}
+// ENDDEBUG
+
 class SignIn extends React.Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
@@ -18,17 +30,23 @@ class SignIn extends React.Component {
   }
 
   handleSubmit(values) {
-    if (values.email) {
+    if (values.accessToken) {
+      this.dispatch(login.facebook(values.userID, values.accessToken))
+           .then((result) => {
+             console.log(arguments);
+           })
+           .catch(console.error);
+    }
+    else if (values.email && values.password) {
       this.dispatch(login(values.email, values.password))
-          .then(() => {
-//            this.dispatch({type: '', path: '/mobile'});
-//            this.context.router.replace('/mobile');
+          .then((result) => {
+            if (result.type == 'POST_LOGIN_SUCCESS') {
+//              this.dispatch({type: '', path: '/mobile'});
+//              this.context.router.replace('/mobile');
+            }
           })
           .catch(console.log);
     }
-    // else if (values.) // facebook login {
-    //  facebook_login();
-    // }
   }
 
   render() {
