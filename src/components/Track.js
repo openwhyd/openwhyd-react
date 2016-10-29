@@ -27,13 +27,13 @@ function Track (props) {
  const original_url = getURLByProvider(content.eId);
 
  return (
-   <div className="track">
+     <div className="track">
          <a href={original_url} target="_blank">
            <div className="thumb" style={thumb_style}></div>
            {content.name}
          </a>
          <div className="btnAdd">✚</div>
-   </div>
+     </div>
  );
 }
 
@@ -45,7 +45,12 @@ function TrackList (props) {
    var child = <p>No track found</p>;
 
    if (elements.length > 0) {
-     child = elements.map((e, index) => (<Track key={e.name} content={e}>{e.name}></Track>));
+     child = elements.map((e, index) => (
+            <div className="track">
+              <Track key={e.name} content={e}>{e.name}></Track>
+            </div>
+           )
+     );
    }
 
     return (

@@ -17,7 +17,7 @@ function api_call(name) {
     };
 
     if (body) {
-      rsaa.body = body;
+      rsaa[CALL_API].body = body;
     }
 
     return rsaa;

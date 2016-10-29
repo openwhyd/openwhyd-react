@@ -15,13 +15,13 @@ function Playlist (props) {
  const thumb_style = {backgroundImage: 'url("' + img_url + '")'};
 
  return (
-   <div className="playlist">
+     <div className="playlist">
          <a href={url} target="_blank">
            <div className="thumb" style={thumb_style}></div>
            {content.name}
          </a>
          <div className="btnAdd">✚</div>
-   </div>
+     </div>
  );
 }
 
@@ -33,7 +33,11 @@ function PlaylistList (props) {
    var child = <p>No playlist found.</p>;
 
    if (elements.length > 0) {
-    child = elements.map((e, index) => (<Playlist key={e.name} content={e}>{e.name}></Playlist>));
+    child = elements.map((e, index) => (
+          <div className="playlist">
+            <Playlist key={e.name} content={e}>{e.name}></Playlist>
+          </div>
+          ));
    }
 
    return (
