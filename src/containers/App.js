@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Mobile from './Mobile.js';
-
 class App extends Component {
   // FIXME : on componentMount?
         // FIXME
@@ -20,7 +18,7 @@ class App extends Component {
 
     return (
       <div className="App">
-      <Mobile/>
+      {this.props.children}
      </div>
     );
   }

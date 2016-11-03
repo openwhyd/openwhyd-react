@@ -38,26 +38,29 @@ function Track (props) {
 }
 
 function TrackList (props) {
-   const {elements} = props;
+ const {loading, elements} = props;
 
-   console.log('List:render');
+ console.log('List:render');
 
-   var child = <p>No track found</p>;
+ var child = <p>No track found</p>;
 
-   if (elements.length > 0) {
-     child = elements.map((e, index) => (
-            <div className="track">
-              <Track key={e.name} content={e}>{e.name}></Track>
-            </div>
-           )
-     );
-   }
+ if (loading) {
+   child = <p>Tracks loading</p>;
+ }
+ else if (elements && elements.length > 0) {
+  child = elements.map((e, index) => (
+         <div key={e.name} className="track">
+           <Track content={e}>{e.name}></Track>
+         </div>
+        )
+  );
+ }
 
-    return (
-    <div className="tracks">
-      {child}
-    </div>
-    );
+ return (
+ <div className="tracks">
+   {child}
+ </div>
+ );
 }
 
 export default TrackList;

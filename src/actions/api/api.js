@@ -1,6 +1,6 @@
 import { CALL_API } from 'redux-api-middleware';
 
-function api_call(name) {
+function api_call(name, onSuccess) {
   const up_name = name.toUpperCase();
 
   return function (method, endpoint, body) {
@@ -18,6 +18,13 @@ function api_call(name) {
 
     if (body) {
       rsaa[CALL_API].body = body;
+    }
+    
+    if (onSuccess) {
+      rsaa[CALL_API].types[1] = {
+          type: up_method + '_' + up_name + '_SUCCESS',
+          payload: onSuccess 
+        };
     }
 
     return rsaa;

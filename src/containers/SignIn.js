@@ -4,7 +4,19 @@ import { connect } from 'react-redux';
 import FacebookLogin from 'react-facebook-login';
 import UserPassForm from '../components/UserPassForm.js';
 
-import login, { facebook_login } from '../actions/api/login.js';
+import login, { facebook } from '../actions/api/login.js';
+
+// DEBUG
+import md5 from 'md5';
+function toForm(json) {
+  var form_data = new FormData();
+
+  for ( var key in json ) {
+    form_data.append(key, json[key]);
+  }
+  return form_data;
+}
+// ENDDEBUG
 
 class SignIn extends React.Component {
   static propTypes = {
@@ -18,17 +30,38 @@ class SignIn extends React.Component {
   }
 
   handleSubmit(values) {
-    if (values.email) {
+    if (values.accessToken) {
+      this.dispatch(facebook(values.userID, values.accessToken))
+           .then((result) => {
+             console.log(arguments);
+           })
+           .catch(console.error);
+    }
+    else if (values.email && values.password) {
+      const hashed_password = md5(values.password);
+      const body = {
+        action:'login',
+        md5: hashed_password,
+        password: hashed_password,
+        email: values.email,
+      };
+
+      fetch('https://openwhyd.org/login', {
+             method: 'POST',
+             body: toForm(body)})
+        .then(console.log)
+        .catch(console.error);
+        /*
       this.dispatch(login(values.email, values.password))
-          .then(() => {
-//            this.dispatch({type: '', path: '/mobile'});
-//            this.context.router.replace('/mobile');
+          .then((result) => {
+            if (result.type == 'POST_LOGIN_SUCCESS') {
+//              this.dispatch({type: '', path: '/mobile'});
+//              this.context.router.replace('/mobile');
+            }
           })
           .catch(console.log);
+          */
     }
-    // else if (values.) // facebook login {
-    //  facebook_login();
-    // }
   }
 
   render() {

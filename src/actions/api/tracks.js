@@ -2,28 +2,31 @@ import api_call from './api.js';
 
 const tracks_api = api_call('tracks');
 
+const format_json = '?format=json'
+
 // FIXME : add a translation layer between client format and whyd here?
+//         -> move this translation layer to the bridge?
 // FIXME : add offset/skip parameter
 export default {
   get: function (user, track_id) {
     if (!track_id){
-      return tracks_api('GET', 'https://openwhyd.org/u/' + user._id);
+      return tracks_api('GET', 'http://localhost:8000/u/' + user._id + format_json);
     }
 
-    return tracks_api('GET', 'https://openwhyd.org/c/' + track_id);
+    return tracks_api('GET', 'http://localhost:8000/c/' + track_id, + format_json);
   },
 
   post: function (user, body) {
     body.action = 'insert';
 
-    return tracks_api('POST', 'https://openwhyd.org/api/post', body);
+    return tracks_api('POST', 'http://localhost:8000/api/post', body);
   },
 
   patch: function (user, body, track_id) {
     body.action = 'insert';
     body._id = track_id;
 
-    return tracks_api('POST', 'https://openwhyd.org/api/post', body);
+    return tracks_api('POST', 'http://localhost:8000/api/post', body);
   },
 
   delete: function (user, track_id) {
@@ -32,6 +35,6 @@ export default {
       _id: track_id
     };
 
-    return tracks_api('POST', 'https://openwhyd.org/api/post', body);
+    return tracks_api('POST', 'http://localhost:8000/api/post', body);
   }
 }
