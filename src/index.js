@@ -10,6 +10,8 @@ import App from './containers/App.js';
 import SignIn from './containers/SignIn.js';
 import NotFound from './containers/NotFound.js';
 
+import Mobile from './containers/Mobile.js';
+
 function requireAuth(store, nextState, replace, next) {
   if (!('isSignedIn' in store.getState().auth)) {
     replace('/login');
@@ -30,6 +32,16 @@ function logout(store, nextState, replace, next) {
   next();
 }
 
+function test(props) {
+  console.log(props);
+  console.log(props.params)
+
+  return <p>pain in my ass</p>
+}
+
+/*<Route> // onEnter={requireAuth.bind(this, store)}>
+</Route>*/
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
@@ -43,8 +55,8 @@ ReactDOM.render(
         path="/logout"
         onEnter={logout.bind(this, store)}/>
 
-      <Route onEnter={requireAuth.bind(this, store)}>
-        <Route path="/mobile" component={App}/>
+      <Route path="/mobile" component={App}>
+        <Route path=":userId" component={Mobile}/>
       </Route>
 
       <Route path="*" component={NotFound} status={404} />

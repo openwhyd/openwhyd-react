@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import FacebookLogin from 'react-facebook-login';
 import UserPassForm from '../components/UserPassForm.js';
 
-import login, { facebook_login } from '../actions/api/login.js';
+import login, { facebook } from '../actions/api/login.js';
 
 // DEBUG
 import md5 from 'md5';
@@ -31,13 +31,27 @@ class SignIn extends React.Component {
 
   handleSubmit(values) {
     if (values.accessToken) {
-      this.dispatch(login.facebook(values.userID, values.accessToken))
+      this.dispatch(facebook(values.userID, values.accessToken))
            .then((result) => {
              console.log(arguments);
            })
            .catch(console.error);
     }
     else if (values.email && values.password) {
+      const hashed_password = md5(values.password);
+      const body = {
+        action:'login',
+        md5: hashed_password,
+        password: hashed_password,
+        email: values.email,
+      };
+
+      fetch('https://openwhyd.org/login', {
+             method: 'POST',
+             body: toForm(body)})
+        .then(console.log)
+        .catch(console.error);
+        /*
       this.dispatch(login(values.email, values.password))
           .then((result) => {
             if (result.type == 'POST_LOGIN_SUCCESS') {
@@ -46,6 +60,7 @@ class SignIn extends React.Component {
             }
           })
           .catch(console.log);
+          */
     }
   }
 

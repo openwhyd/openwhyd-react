@@ -6,42 +6,39 @@ import TrackList from '../components/Track.js';
 import PlaylistList from '../components/Playlist.js';
 import Search from '../components/Search.js';
 
-//import tracks_api from '../actions/api/tracks.js';
+import tracks_api from '../actions/api/tracks.js';
+import playlists_api from '../actions/api/playlists.js';
 
 // DEBUG
-import {tracks, playlists} from './mock_data.js';
-
 class Mobile extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired
-  }
+  componentDidMount() {
+    const { dispatch, params }  = this.props;
 
-  constructor(props) {
-    super(props);
-  
-//    const { dispatch }  = this.props; // FIXME : tracks, playlists
-
-//    dispatch(tracks_api.get({_id: '5095275a7e91c862b2a83f49'}));
+    dispatch(tracks_api.get({_id: params.userId}));
+    dispatch(playlists_api.get({_id: params.userId}));
   }
 
   render() {
-   // for each in tracks and playlists
-   // if wait_action in store
-   //  loading {name}
-
     return (
           <div className="mobile">
-          <Search/>
-          <h1>My playlists</h1>
-          <PlaylistList elements={playlists}/>
-          <h1>My tracks</h1>
-          <TrackList elements={tracks}/>
+            <Search/>
+
+            <h1>My playlists</h1>
+            <PlaylistList
+             loading={this.props.playlists.loading}
+             elements={this.props.playlists.playlists}/>
+
+            <h1>My tracks</h1>
+            <TrackList
+             loading={this.props.tracks.loading}
+             elements={this.props.tracks.tracks}/>
+
           </div>
         );
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, props) {
   return {
     tracks: state.tracks,
     playlists: state.playlists

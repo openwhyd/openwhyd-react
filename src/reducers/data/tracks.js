@@ -1,15 +1,23 @@
 export default function (state = {}, action) {
-  console.log(action);
-
   switch (action.type) {
-    /*case 'TRACKS_GET_SUCCESS':
-      // FIXME : push track
+    case 'GET_TRACKS_REQUEST':
+      return {
+        ...state,
+        loading: true
+      }
+
+    case 'GET_TRACKS_SUCCESS':
+      /*
       if (action.payload._id) {
         return Object.assign({}, state, {})    
       }
-
-      return Object.assign({}, state, action.payload)    
       */
+
+      return {
+        ...state,
+        tracks: action.payload,
+        loading: false
+      };   
 
     default:
       return state
