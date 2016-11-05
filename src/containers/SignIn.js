@@ -7,7 +7,6 @@ import UserPassForm from '../components/UserPassForm.js';
 import login, { facebook } from '../actions/api/login.js';
 
 // DEBUG
-import md5 from 'md5';
 function toForm(json) {
   var form_data = new FormData();
 
@@ -38,29 +37,20 @@ class SignIn extends React.Component {
            .catch(console.error);
     }
     else if (values.email && values.password) {
-      const hashed_password = md5(values.password);
       const body = {
-        action:'login',
-        md5: hashed_password,
-        password: hashed_password,
         email: values.email,
+        password: values.password,
       };
 
-      fetch('https://openwhyd.org/login', {
-             method: 'POST',
-             body: toForm(body)})
-        .then(console.log)
-        .catch(console.error);
-        /*
       this.dispatch(login(values.email, values.password))
           .then((result) => {
             if (result.type == 'POST_LOGIN_SUCCESS') {
+              console.log(this.context);
 //              this.dispatch({type: '', path: '/mobile'});
 //              this.context.router.replace('/mobile');
             }
           })
           .catch(console.log);
-          */
     }
   }
 

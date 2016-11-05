@@ -1,4 +1,5 @@
 import React from 'react';
+import {Row, Col} from 'react-bootstrap';
 import './Track.css';
 
 function getURLByProvider(url) {
@@ -27,38 +28,53 @@ function Track (props) {
  const original_url = getURLByProvider(content.eId);
 
  return (
-     <div className="track">
-         <a href={original_url} target="_blank">
-           <div className="thumb" style={thumb_style}></div>
-           {content.name}
-         </a>
-         <div className="btnAdd">✚</div>
-     </div>
+  <Row>
+    <a href={original_url} target="_blank">
+    <Col xs={1}>
+        <div className="thumb" style={thumb_style}></div>
+    </Col>
+
+    <Col xs={7}>
+     {content.name}
+    </Col>
+    </a>
+
+  </Row>
  );
 }
 
+// NOTE their might be a cleaner way to hide the elements
+// than replacing them with empty parts?
 function TrackList (props) {
  const {loading, elements} = props;
 
  console.log('List:render');
 
- var child = <p>No track found</p>;
+ var loading_spinner = <p>No track found</p>;
 
  if (loading) {
-   child = <p>Tracks loading</p>;
+   loading_spinner =(
+        <Row>
+          <Col xs={8}>
+            <p>Tracks loading</p>
+          </Col>
+        </Row>
+  )
  }
- else if (elements && elements.length > 0) {
+
+ var child = <div></div>;
+ 
+ if (elements && elements.length > 0) {
+  loading_spinner = <div></div>
   child = elements.map((e, index) => (
-         <div key={e.name} className="track">
-           <Track content={e}>{e.name}></Track>
-         </div>
-        )
-  );
+           <Track key={e.name} content={e}>{e.name}></Track>
+        ));
  }
 
  return (
  <div className="tracks">
    {child}
+   {loading_spinner}
  </div>
  );
 }

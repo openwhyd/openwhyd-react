@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
+import {Row, Col} from 'react-bootstrap';
 
 import {connect} from 'react-redux';
 
+import NavigationBar from '../components/NavBar.js';
 import TrackList from '../components/Track.js';
 import PlaylistList from '../components/Playlist.js';
 import Search from '../components/Search.js';
@@ -18,20 +20,54 @@ class Mobile extends Component {
     dispatch(playlists_api.get({_id: params.userId}));
   }
 
+  loadMore() {
+    const {dispatch, tracks, params} = this.props;
+
+    const last_track = tracks.tracks[tracks.tracks.length - 1];
+
+    dispatch(tracks_api.get({_id: params.userId}, null, last_track._id))
+  }
+
   render() {
+    const {tracks, playlists} = this.props;
+
+    var loadMore = <p></p>
+    if (tracks.tracks && tracks.tracks.length > 0) {
+      loadMore =
+        <input type="button" onClick={this.loadMore.bind(this)} value="Load more" />
+    }
+
+    // FIXME : move Search to NavBar
     return (
           <div className="mobile">
-            <Search/>
 
-            <h1>My playlists</h1>
+            <Row>
+              <Col xs={8}>
+                <Search/>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col xs={8}>
+                <h1>Playlists</h1>
+              </Col>
+            </Row>
+
             <PlaylistList
-             loading={this.props.playlists.loading}
-             elements={this.props.playlists.playlists}/>
+             loading={playlists.loading}
+             elements={playlists.playlists}/>
 
-            <h1>My tracks</h1>
+            <Row>
+              <Col xs={8}>
+                <h1>Tracks</h1>
+              </Col>
+            </Row>
+
             <TrackList
-             loading={this.props.tracks.loading}
-             elements={this.props.tracks.tracks}/>
+             loading={tracks.loading}
+             elements={tracks.tracks}/>
+
+             {loadMore}
 
           </div>
         );

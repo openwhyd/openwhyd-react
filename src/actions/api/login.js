@@ -1,10 +1,8 @@
 import api_call from './api.js';
-import md5 from 'md5';
 
 const login = api_call('login');
 
-const URL = 'localhost:8080';
-//const URL = 'openwhyd.org';
+const URL = 'localhost:8000';
 
 function toForm(json) {
   var form_data = new FormData();
@@ -17,23 +15,19 @@ function toForm(json) {
 }
 
 export default function (email, password) {
-  const hashed_password = md5(password);
   const body = {
-    action:'login',
-    md5: hashed_password,
-    password: hashed_password,
     email,
+    password: password,
   };
 
-  return login('POST', 'https://' + URL + '/login', toForm(body));
+  return login('POST', 'http://' + URL + '/login', body);
 }
 
 export function facebook(fbUid, token) {
   const body = {
-    ajax: 'iframe',
     fbUid: fbUid,
     fbAccessToken: token
   };
 
-  return login('POST', 'https://' + URL + '/facebookLogin', toForm(body));
+  return login('POST', 'http://' + URL + '/facebookLogin', body);
 }

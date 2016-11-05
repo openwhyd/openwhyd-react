@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Row, Col} from 'react-bootstrap';
 import './Playlist.css';
 
 function Playlist (props) {
@@ -15,13 +16,18 @@ function Playlist (props) {
  const thumb_style = {backgroundImage: 'url("' + img_url + '")'};
 
  return (
-     <div className="playlist">
-         <a href={url} target="_blank">
-           <div className="thumb" style={thumb_style}></div>
-           {content.name}
-         </a>
-         <div className="btnAdd">✚</div>
-     </div>
+  <Row>
+   <a href={url} target="_blank">
+   <Col xs={1}>
+     <div className="thumb" style={thumb_style}></div>
+   </Col>
+
+   <Col xs={7}>
+     <a href={url}>{content.name}</a>
+   </Col>
+   </a>
+
+  </Row>
  );
 }
 
@@ -30,22 +36,31 @@ function PlaylistList (props) {
 
  console.log('List:render');
 
- var child = <p>No playlist found.</p>;
+ var loading_spinner = <p>No playlist found</p>;
 
  if (loading) {
-   child = <p>Playlists loading</p>;
+   loading_spinner =(
+        <Row>
+          <Col xs={8}>
+            <p>Playlists loading</p>
+          </Col>
+        </Row>
+  )
  }
- else if (elements && elements.length > 0) {
+
+ var child = <div></div>;
+ 
+ if (elements && elements.length > 0) {
+  loading_spinner = <div></div>
   child = elements.map((e, index) => (
-        <div key={e.name} className="playlist">
-          <Playlist content={e}>{e.name}></Playlist>
-        </div>
+          <Playlist key={e.name} content={e}>{e.name}></Playlist>
         ));
  }
 
  return (
  <div className="playlists">
   {child}
+  {loading_spinner}
  </div>
  );
 }

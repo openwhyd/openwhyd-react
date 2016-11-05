@@ -8,12 +8,19 @@ const format_json = '?format=json'
 //         -> move this translation layer to the bridge?
 // FIXME : add offset/skip parameter
 export default {
-  get: function (user, track_id) {
+  get: function (user, track_id, after = '') {
     if (!track_id){
-      return tracks_api('GET', 'http://localhost:8000/u/' + user._id + format_json);
+
+      if (after) {
+        after = '&after=' + after;
+      }
+
+      const url = 'http://localhost:8000/u/' + user._id + format_json + after;
+
+      return tracks_api('GET', url);
     }
 
-    return tracks_api('GET', 'http://localhost:8000/c/' + track_id, + format_json);
+    return tracks_api('GET', 'http://localhost:8000/c/' + track_id + format_json);
   },
 
   post: function (user, body) {

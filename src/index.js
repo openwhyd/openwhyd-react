@@ -32,13 +32,6 @@ function logout(store, nextState, replace, next) {
   next();
 }
 
-function test(props) {
-  console.log(props);
-  console.log(props.params)
-
-  return <p>pain in my ass</p>
-}
-
 /*<Route> // onEnter={requireAuth.bind(this, store)}>
 </Route>*/
 
