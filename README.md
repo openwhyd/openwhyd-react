@@ -8,7 +8,7 @@ You can find the most recent version of this guide [here](https://github.com/fac
 * Instal Docker Client via https://www.docker.com/community-edition
 * Build image `docker build -t openwhyd-react .`
 
-* Launch container `docker run -P -t openwhyd-react`
+* Launch container `docker run -p 3000:3000 -t openwhyd-react`
 * Open [http://localhost:3000](http://localhost:3000)
 
 ## Table of Contents
