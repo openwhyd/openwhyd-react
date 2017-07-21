@@ -1,4 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+# React client for Openwhyd.org (WIP) ![Travis-CI](https://travis-ci.org/openwhyd/openwhyd-react.svg?branch=master) [![OpenCollective](https://opencollective.com/openwhyd/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/openwhyd/sponsors/badge.svg)](#sponsors)
+
+> Collect, play and share music from various streaming platforms
+
+Openwhyd's curating platform (website + iphone app) allows music lovers to find and play very specific versions of songs that their love, and are not available on major music platforms such as Spotify or iTunes. E.g. rare remixes, DJ sets, bootlegs and epic live performances.
+
+**You can use it on [openwhyd.org](https://openwhyd.org).**
+
+- Latest Openwhyd stats, analytics and demographics: [Openwhyd data report, mid-october 2016](https://infograph.venngage.com/p/160097/openwhyd-data-report-mid-october-2016)
+- A question / problem? --> Check out [our FAQ](https://github.com/openwhyd/openwhyd/blob/master/docs/FAQ.md)
+- ... and don't forget to [like Openwhyd on Facebook](https://facebook.com/openwhyd/), and [follow us on Twitter](https://twitter.com/open_whyd).
+
+## Status of this repository
+
+The [Openwhyd platform](https://github.com/openwhyd/openwhyd) is the result of years of iterative development, by the start-up company [Whyd](https://whyd.com). Read [the full story from Whyd to Openwhyd](https://medium.com/openwhyd/music-amongst-other-topics-a4f41657d6d).
+
+**Openwhyd-react intends to become the new front-end of openwhyd.org, by plugging into [Openwhyd](https://github.com/openwhyd/openwhyd)'s [API](https://github.com/openwhyd/openwhyd/blob/master/docs/whydJS-json-api.md).**
+
+We're just getting started, and we welcome contributors, including beginners!
+
+This react client (WIP) was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.  
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
@@ -10,6 +30,14 @@ You can find the most recent version of this guide [here](https://github.com/fac
 
 * Launch container `docker run -p 3000:3000 -t openwhyd-react`
 * Open [http://localhost:3000](http://localhost:3000)
+
+## Contribute
+
+If you want to contribute, please:
+
+- read the contribution guidelines: [CONTRIBUTING.md](https://github.com/openwhyd/openwhyd-react/blob/master/CONTRIBUTING.md);
+- pick an issue from [our roadmap](https://github.com/openwhyd/openwhyd-react/projects/1), work on it, then propose a Pull-Request;
+- if you need help, [ask us on Slack](https://openwhyd-slack.herokuapp.com/).
 
 ## Table of Contents
 
