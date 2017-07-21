@@ -1,0 +1,42 @@
+// GET /tracks
+// https://openwhyd.org/u/{:user_id}
+
+// GET /tracks/:id
+// https://openwhyd.org/c/{:track_id}
+
+// POST
+// https://openwhyd.org/api/post
+/*
+action:insert
+eId:/yt/VpmOTGungnA
+name:Minor Swing - Django Reinhardt & Stéphane Grappelli
+img:https://i.ytimg.com/vi/VpmOTGungnA/default.jpg
+src[id]:
+src[name]:
+ctx:bk
+pl[name]:full stream
+pl[id]:null
+text:
+*/
+
+// PUT
+// POST https://openwhyd.org/api/post
+/*
+action:insert
+eId:/yt/VpmOTGungnA
+name:Minor Swing - Django Reinhardt & Stéphane Grappelli
+img:https://i.ytimg.com/vi/VpmOTGungnA/default.jpg
+src[id]:
+src[name]:
+_id:5807eb9287890f4a7367da5d // I guess that's the difference
+pl[name]:full stream
+pl[id]:null
+text:a test
+*/
+
+// DELETE
+// POST https://openwhyd.org/api/post
+/*
+action:delete
+_id:5807eb9287890f4a7367da5d
+*/
